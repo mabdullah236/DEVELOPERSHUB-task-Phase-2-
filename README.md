@@ -3,7 +3,8 @@
 
 # Project Overview
 This project is a RESTful API built for a Bookstore. It allows users to perform
-CRUD (Create, Read, Update, Delete) operations on a database of books.This was created as part of the DEVELOPERSHUB Backend Development Internship (Phase 2).
+CRUD (Create, Read, Update, Delete) operations on a database of books.This was created as part of the DEVELOPERSHUB Backend
+Development Internship (Phase 2).
 
 # Technologies Used
 * **Backend Framework:** Django, Django REST Framework (DRF)
