@@ -64,4 +64,3 @@ Development Internship (Phase 2).
   "publishedDate": "2018-10-16"
 }
 ```
-```
