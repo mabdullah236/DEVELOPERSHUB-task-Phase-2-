@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py shell -c "from django.contrib.auth.models import User; User.objects.filter(username='apiadmin').delete()" && python manage.py createsuperuser --noinput || true && gunicorn bookstore_api.wsgi
+web: python manage.py migrate && python manage.py shell -c "from django.contrib.auth.models import User; User.objects.filter(username='apiadmin').delete()" && python manage.py createsuperuser --noinput || true && gunicorn core.wsgi
