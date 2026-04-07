@@ -1,50 +1,60 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
+from django.db.models import Value
+from django.db.models.functions import Replace
 from .models import Book
 from .serializers import BookSerializer
 
-
-@api_view(['GET','POST'])
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def book_list(request):
-
-    # to get data from database 
-    if request.method=='GET':
-        books=Book.objects.all()
-        serializer=BookSerializer(books,many=True)
+    if request.method == 'GET':
+        search_query = request.GET.get('search')
+        books = Book.objects.all()
+        if search_query:
+            search_query = search_query.replace(" ", "")
+            books = books.annotate(
+                no_space_title=Replace('title', Value(' '), Value(''))
+            ).filter(no_space_title__icontains=search_query)
+        
+        serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
-    elif request.method=='POST':
-        serializer=BookSerializer(data=request.data)
+
+    elif request.method == 'POST':
+        serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(owner=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET','PUT','DELETE'])
-def book_detail(request,pk):
-    
-    # find book from db
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def book_detail(request, pk):
     try:
-        book=Book.objects.get(pk=pk)
+        book = Book.objects.get(pk=pk)
     except Book.DoesNotExist:
-        # if not found then show error 
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    # get book by id
-    if request.method=='GET':
-        serializer=BookSerializer(book)
+
+    # Object-level permission ko function-based view mein manually check karna
+    permission = IsOwnerOrReadOnly()
+    if not permission.has_object_permission(request, None, book):
+        raise PermissionDenied("Aap is book ke owner nahi hain isliye isay edit ya delete nahi kar sakte.")
+
+    if request.method == 'GET':
+        serializer = BookSerializer(book)
         return Response(serializer.data)
-    
-    # Update book data
-    elif request.method=='PUT':
-        serializer=BookSerializer(book,data=request.data)
+
+    elif request.method == 'PUT':
+        serializer = BookSerializer(book, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-    
-    # Delete book
-    elif request.method=='DELETE':
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
         book.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
