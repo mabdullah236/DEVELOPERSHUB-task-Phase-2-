@@ -68,7 +68,7 @@ edit or delete it.
 | `DELETE` | `/api/books/<id>/` | Remove a book from the database | Yes (Owner Only)|
 
 ### Sample JSON Input (For POST and PUT requests)
-*Note: Include Basic Authentication in your request headers for POST and PUT and DELETE.*
+*Note: Include Basic Authentication in your request headers for POST, PUT and DELETE.*
 ```json
 {
   "title": "Atomic Habits",
