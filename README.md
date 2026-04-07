@@ -1,25 +1,29 @@
 ```markdown
 # Bookstore API - Phase 2 Task
 
-# Project Overview
-This project is a RESTful API built for a Bookstore. It allows users to perform CRUD (Create, Read, Update, Delete) operations
-on a database of books. This was created as part of the DEVELOPERSHUB Backend Development Internship (Phase 2).
+## Live Demo
+**Production URL:** [https://developershub-task-phase-2-production.up.railway.app/api/books/](https://developershub-task-phase-2-production.up.railway.app/api/books/)
+*(Note: Use tools like Postman to interact with the API endpoints)*
+
+## Project Overview
+This project is a fully functional RESTful API built for a Bookstore. It allows users to perform CRUD (Create, Read, Update, Delete)
+operations on a database of books. This was created as part of the **DEVELOPERSHUB Backend Development Internship (Phase 2)**.
 
 ### Advanced Features Implemented 
-* **Search Functionality:** Search books by title (ignores spaces).
-* **Pagination:** Limits the number of books returned per page for better performance.
+* **Search Functionality:** Search books by title.
+* **Pagination:** Limits the number of books returned per page for optimized performance.
 * **Data Validation:** Custom validation ensures `price` is positive and `isbn` is exactly 13 digits and numeric.
-* **Authentication & Permissions:** Secure API endpoints. Only logged-in users can add books, and only the owner of a book can
-edit or delete it.
+* **Authentication & Permissions:** Secure API endpoints. Only logged-in users can add books, and only the owner of a book can edit or delete it.
+* **Production Ready:** Fully deployed with static file handling (WhiteNoise) and secure HTTP headers.
 
-# Technologies Used
+## Technologies Used
 * **Backend Framework:** Django, Django REST Framework (DRF)
 * **Language:** Python
-* **Database:** SQLite / MySQL 
-* **API Testing Tool:** Postman
-* **Version Control:** Git & GitHub
+* **Database:** SQLite (Local) / PostgreSQL (Production)
+* **Deployment:** Railway.app
+* **Tools:** Postman, Git & GitHub
 
-# How to Run Locally
+## How to Run Locally
 
 1. **Clone the repository:**
    ```bash
@@ -36,7 +40,7 @@ edit or delete it.
 
 3. **Install required dependencies:**
    ```bash
-   pip install django djangorestframework
+   pip install -r requirements.txt
    ```
 
 4. **Apply database migrations:**
@@ -56,7 +60,7 @@ edit or delete it.
    ```
    *The server will start at `http://127.0.0.1:8000/`*
 
-# API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description | Auth Required? |
 |---|---|---|---|
@@ -68,13 +72,13 @@ edit or delete it.
 | `DELETE` | `/api/books/<id>/` | Remove a book from the database | Yes (Owner Only)|
 
 ### Sample JSON Input (For POST and PUT requests)
-*Note: Include Basic Authentication in your request headers for POST, PUT and DELETE.*
+*Note: Include Basic Authentication in your request headers for POST and PUT.*
 ```json
 {
   "title": "Atomic Habits",
   "author": "James Clear",
-  "price": 20,
-  "isbn": "978073521129",
-  "publishedDate": "2018-10-16"
+  "price": 1500,
+  "isbn": "9780735211299",
+  "published_date": "2018-10-16"
 }
 ```
