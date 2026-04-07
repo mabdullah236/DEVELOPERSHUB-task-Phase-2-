@@ -3,13 +3,15 @@
 
 # Project Overview
 This project is a RESTful API built for a Bookstore. It allows users to perform
-CRUD (Create, Read, Update, Delete) operations on a database of books. This was created as part of the DEVELOPERSHUB Backend Development Internship (Phase 2).
+CRUD (Create, Read, Update, Delete) operations on a database of books. This was created as part of the DEVELOPERSHUB Backend
+Development Internship (Phase 2).
 
 ### Advanced Features Implemented 
 * **Search Functionality:** Search books by title (ignores spaces).
 * **Pagination:** Limits the number of books returned per page for better performance.
 * **Data Validation:** Custom validation ensures `price` is positive and `isbn` is exactly 13 digits and numeric.
-* **Authentication & Permissions:** Secure API endpoints. Only logged-in users can add books, and only the owner of a book can edit or delete it.
+* **Authentication & Permissions:** Secure API endpoints. Only logged-in users can add books, and only the owner of a book can
+edit or delete it.
 
 # Technologies Used
 * **Backend Framework:** Django, Django REST Framework (DRF)
