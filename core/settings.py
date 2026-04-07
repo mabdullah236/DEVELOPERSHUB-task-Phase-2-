@@ -30,19 +30,20 @@ SECRET_KEY = 'django-insecure-r4-pse6x2(ag3k(o6@nufp+zbr^a&=)_i8z*8mlzt_uy=r=i0_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'developershub-task-phase-2-production.up.railway.app', 
-    '127.0.0.1', 
-    'localhost'
-]
-CSRF_TRUSTED_ORIGINS = [
-    'https://developershub-task-phase-2-production.up.railway.app', 
-]
+ALLOWED_HOSTS = ['developershub-task-phase-2-production.up.railway.app', '127.0.0.1', 'localhost']
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://developershub-task-phase-2-production.up.railway.app'
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Application definition
 
