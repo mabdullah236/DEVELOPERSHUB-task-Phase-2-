@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User # Django ka built-in User model
+from django.contrib.auth.models import User
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
@@ -7,7 +7,6 @@ class Book(models.Model):
     price = models.IntegerField()
     isbn = models.CharField(unique=True, max_length=13)
     publishedDate = models.DateField()
-    # Naya field: Har book ek user se link hogi
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='books', null=True, blank=True)
 
     def __str__(self):

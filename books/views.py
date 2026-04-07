@@ -39,10 +39,9 @@ def book_detail(request, pk):
     except Book.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    # Object-level permission ko function-based view mein manually check karna
     permission = IsOwnerOrReadOnly()
     if not permission.has_object_permission(request, None, book):
-        raise PermissionDenied("Aap is book ke owner nahi hain isliye isay edit ya delete nahi kar sakte.")
+        raise PermissionDenied("You are not the owner of this book therefore you cannot change or delete it.")
 
     if request.method == 'GET':
         serializer = BookSerializer(book)

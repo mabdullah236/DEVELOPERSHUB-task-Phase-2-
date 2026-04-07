@@ -9,7 +9,6 @@ class BookSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Price must be greater than zero.")
         return value
     def validate_isbn(self, value):
-        # Dono conditions check karna: length 13 AND sirf numbers
         if len(value) == 13 and value.isdigit():
             return value
         else:
