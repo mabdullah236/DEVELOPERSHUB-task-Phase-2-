@@ -23,11 +23,10 @@ def home(request):
     <html>
         <body style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
             <h1>📚 Welcome to Bookstore API</h1>
-            <p>Your API is successfully running on Railway!</p>
             <br>
             <a href="/api/books/" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Go to Books API</a>
             <br><br>
-            <a href="/admin/" style="padding: 10px 20px; background-color: #008CBA; color: white; text-decoration: none; border-radius: 5px;">Go to Admin Panel</a>
+            <a href="/admin/" style="margin-top:5px;padding: 10px 20px; background-color: #008CBA; color: white; text-decoration: none; border-radius: 5px;">Go to Admin Panel</a>
         </body>
     </html>
     """
